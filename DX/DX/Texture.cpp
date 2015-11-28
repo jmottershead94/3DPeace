@@ -59,7 +59,6 @@ Texture::~Texture()
 	}
 }
 
-
 ID3D11ShaderResourceView* Texture::GetTexture()
 {
 	return m_texture;

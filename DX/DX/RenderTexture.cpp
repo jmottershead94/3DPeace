@@ -11,7 +11,6 @@ RenderTexture::RenderTexture(ID3D11Device* device, int textureWidth, int texture
 	D3D11_TEXTURE2D_DESC depthBufferDesc;
 	D3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc;
 
-
 	// Store the width and height of the render texture.
 	m_textureWidth = textureWidth;
 	m_textureHeight = textureHeight;
@@ -128,7 +127,6 @@ RenderTexture::~RenderTexture()
 		m_renderTargetTexture = 0;
 	}
 }
-
 
 void RenderTexture::SetRenderTarget(ID3D11DeviceContext* deviceContext)
 {

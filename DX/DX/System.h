@@ -6,7 +6,9 @@
 
 // INCLUDES 
 #include <windows.h>
-#include "Lab1.h"
+#include "Lab9.h"
+#include "Lab4.h"
+#include "Coursework.h"
 #include "Input.h"
 
 class System
@@ -28,8 +30,7 @@ private:
 	LPCWSTR m_applicationName;
 	HINSTANCE m_hinstance;
 	HWND m_hwnd;
-	
-	Lab1* m_Application;
+	Coursework* m_Application;
 	Input m_Input;
 
 //Prototypes

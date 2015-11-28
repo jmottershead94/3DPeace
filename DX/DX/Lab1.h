@@ -6,6 +6,8 @@
 #include "baseapplication.h"
 
 #include "trianglemesh.h"
+#include "QuadMesh.h"
+#include "Model.h"
 #include "ColourShader.h"
 
 class Lab1 : public BaseApplication
@@ -23,6 +25,8 @@ private:
 private:
 	ColourShader* m_ColourShader;
 	TriangleMesh* m_Mesh;
+	QuadMesh* m_QuadMesh;
+	Model* m_Model;
 
 };
 

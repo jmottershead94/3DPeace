@@ -125,4 +125,14 @@ void BaseApplication::HandleInput(float frameTime)
 		// rotate right
 		m_Camera->TurnRight();
 	}
+	if (m_Input->isKeyDown('C'))
+	{
+		// Turning wireframe mode on.
+		m_Direct3D->TurnOnWireframe();
+	}
+	if (m_Input->isKeyDown('V'))
+	{
+		// Turning wireframe mode off.
+		m_Direct3D->TurnOffWireframe();
+	}
 }

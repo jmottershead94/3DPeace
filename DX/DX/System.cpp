@@ -13,10 +13,9 @@ System::System()
 	InitializeWindows(screenWidth, screenHeight);
 
 	// Create the application wrapper object.
-	m_Application = new Lab1(m_hinstance, m_hwnd, screenWidth, screenHeight, &m_Input);
-
+	// Change to labX for next lab!
+	m_Application = new Coursework(m_hinstance, m_hwnd, screenWidth, screenHeight, &m_Input);
 }
-
 
 System::~System()
 {
