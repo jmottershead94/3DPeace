@@ -14,7 +14,7 @@ System::System()
 
 	// Create the application wrapper object.
 	// Change to labX for next lab!
-	m_Application = new Coursework(m_hinstance, m_hwnd, screenWidth, screenHeight, &m_Input);
+	m_Application = new Lab4(m_hinstance, m_hwnd, screenWidth, screenHeight, &m_Input);
 }
 
 System::~System()

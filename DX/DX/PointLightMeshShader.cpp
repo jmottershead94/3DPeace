@@ -131,10 +131,6 @@ void PointLightMeshShader::SetShaderParameters(ID3D11DeviceContext* deviceContex
 	// Send light data to pixel shader
 	deviceContext->Map(m_lightBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	lightPtr = (LightBufferType*)mappedResource.pData;
-	/*lightPtr->ambient = light->GetAmbientColour();
-	lightPtr->diffuse = light->GetDiffuseColour();
-	lightPtr->position = light->GetPosition();
-	lightPtr->padding = 0.0f;*/
 
 	XMFLOAT4 lightPosition = { 0.0f, 0.0f, 0.0f, 0.0f };
 	for (int i = 0; i < 3; i++)

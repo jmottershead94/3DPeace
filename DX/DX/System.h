@@ -30,7 +30,7 @@ private:
 	LPCWSTR m_applicationName;
 	HINSTANCE m_hinstance;
 	HWND m_hwnd;
-	Coursework* m_Application;
+	Lab4* m_Application;
 	Input m_Input;
 
 //Prototypes

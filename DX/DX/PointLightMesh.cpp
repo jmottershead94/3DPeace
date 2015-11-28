@@ -2,10 +2,7 @@
 
 PointLightMesh::PointLightMesh(ID3D11Device* device, WCHAR* textureFilename, XMFLOAT3 diffuseColour, XMFLOAT3 renderPosition)
 {
-
-	// Setting up a sphere with the point light.
-	pointlightSphereMesh = new SphereMesh(device, textureFilename, 20);
-
+	
 	for (int i = 0; i < 3; i++)
 	{
 		pointlightSpheres[i] = new SphereMesh(device, textureFilename, 20);
@@ -48,10 +45,6 @@ PointLightMesh::PointLightMesh(ID3D11Device* device, WCHAR* textureFilename, XMF
 PointLightMesh::~PointLightMesh()
 {
 	
-	if (pointlightSphereMesh)
-	{
-		delete pointlightSphereMesh;
-		pointlightSphereMesh = nullptr;
-	}
+	
 
 }
