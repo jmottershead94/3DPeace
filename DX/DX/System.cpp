@@ -4,7 +4,7 @@
 System::System()
 {
 	int screenWidth, screenHeight;
-	
+
 	// Initialize the width and height of the screen to zero before sending the variables into the function.
 	screenWidth = 0;
 	screenHeight = 0;
@@ -14,7 +14,7 @@ System::System()
 
 	// Create the application wrapper object.
 	// Change to labX for next lab!
-	m_Application = new Lab4(m_hinstance, m_hwnd, screenWidth, screenHeight, &m_Input);
+	m_Application = new Coursework(m_hinstance, m_hwnd, screenWidth, screenHeight, &m_Input);
 }
 
 System::~System()

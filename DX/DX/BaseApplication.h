@@ -18,10 +18,8 @@ const float SCREEN_NEAR = 0.1f;		//0.1f
 class BaseApplication
 {
 public:
-
 	BaseApplication(HINSTANCE hinstance, HWND hwnd, int screenWidth, int screenHeight, Input*);
 	~BaseApplication();
-
 	virtual bool Frame();
 
 protected:
@@ -29,6 +27,7 @@ protected:
 	virtual bool Render() = 0;
 
 protected:
+	bool m_wireframeMode;
 	Input* m_Input;
 	D3D* m_Direct3D;
 	Camera* m_Camera;

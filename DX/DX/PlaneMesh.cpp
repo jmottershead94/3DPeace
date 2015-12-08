@@ -18,7 +18,6 @@ PlaneMesh::~PlaneMesh()
 	BaseMesh::~BaseMesh();
 }
 
-
 void PlaneMesh::InitBuffers(ID3D11Device* device)
 {
 	VertexType* vertices;
@@ -48,7 +47,6 @@ void PlaneMesh::InitBuffers(ID3D11Device* device)
 	v = 0;
 	increment = 1.0f / m_resolution;
 	
-
 	// Load the vertex and index arrays with the terrain data.
 	for (j = 0; j<(m_resolution - 1); j++)
 	{
@@ -56,7 +54,7 @@ void PlaneMesh::InitBuffers(ID3D11Device* device)
 		{
 			// Upper left.
 			positionX = (float)i;
-			positionZ = (float)(j);
+			positionZ = (float)j;
 
 			vertices[index].position = XMFLOAT3(positionX, 0.0f, positionZ);
 			vertices[index].texture = XMFLOAT2(u, v);
@@ -69,7 +67,7 @@ void PlaneMesh::InitBuffers(ID3D11Device* device)
 			positionZ = (float)(j + 1);
 
 			vertices[index].position = XMFLOAT3(positionX, 0.0f, positionZ);
-			vertices[index].texture = XMFLOAT2(u + increment, v + increment);
+			vertices[index].texture = XMFLOAT2(u + increment, v);
 			vertices[index].normal = XMFLOAT3(0.0, 1.0, 0.0);
 			indices[index] = index;
 			index++;
@@ -91,7 +89,7 @@ void PlaneMesh::InitBuffers(ID3D11Device* device)
 			positionZ = (float)(j);
 
 			vertices[index].position = XMFLOAT3(positionX, 0.0f, positionZ);
-			vertices[index].texture = XMFLOAT2(u, v);
+			vertices[index].texture = XMFLOAT2(u + increment, v + increment);
 			vertices[index].normal = XMFLOAT3(0.0, 1.0, 0.0);
 			indices[index] = index;
 			index++;

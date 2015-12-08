@@ -46,6 +46,13 @@ BaseShader::~BaseShader()
 		m_geometryShader->Release();
 		m_geometryShader = 0;
 	}
+
+	// Release the compute shader.
+	if (m_computeShader)
+	{
+		m_computeShader->Release();
+		m_computeShader = nullptr;
+	}
 }
 
 
@@ -252,6 +259,38 @@ void BaseShader::loadGeometryShader(WCHAR* filename)
 	geometryShaderBuffer = 0;
 }
 
+void BaseShader::loadComputeShader(WCHAR* filename)
+{
+	HRESULT result;
+	ID3D10Blob* errorMessage;
+	ID3D10Blob* computeShaderBuffer;
+
+	// Compile the compute shader code.
+	result = D3DCompileFromFile(filename, NULL, NULL, "main", "cs_5_0", D3DCOMPILE_ENABLE_STRICTNESS, 0, &computeShaderBuffer, &errorMessage);
+	if (FAILED(result))
+	{
+		// If the shader failed to compile it should have writen something to the error message.
+		if (errorMessage)
+		{
+			OutputShaderErrorMessage(errorMessage, m_hwnd, filename);
+		}
+		// If there was nothing in the error message then it simply could not find the shader file itself.
+		else
+		{
+			MessageBox(m_hwnd, filename, L"Missing Shader File", MB_OK);
+		}
+
+		exit(0);
+	}
+
+	// Create the compute shader from the buffer.
+	m_device->CreateComputeShader(computeShaderBuffer->GetBufferPointer(), computeShaderBuffer->GetBufferSize(), NULL, &m_computeShader);
+
+	// Release the compute shader.
+	computeShaderBuffer->Release();
+	computeShaderBuffer = nullptr;
+}
+
 void BaseShader::OutputShaderErrorMessage(ID3D10Blob* errorMessage, HWND hwnd, WCHAR* shaderFilename)
 {
 	char* compileErrors;
@@ -313,6 +352,22 @@ void BaseShader::Render(ID3D11DeviceContext* deviceContext, int indexCount)
 	if (m_geometryShader)
 	{
 		deviceContext->GSSetShader(m_geometryShader, NULL, 0);
+	}
+	else
+	{
+		deviceContext->GSSetShader(NULL, NULL, 0);
+	}
+
+	// If the compute shader is not null, then set CS.
+	if (m_computeShader)
+	{
+		deviceContext->CSSetShader(m_computeShader, NULL, 0);
+	}
+	// Otherwise, we are not using the compute shader.
+	else
+	{
+		// Set it to null.
+		deviceContext->CSSetShader(NULL, NULL, 0);
 	}
 
 	// Render the triangle.

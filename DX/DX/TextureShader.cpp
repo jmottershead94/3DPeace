@@ -1,12 +1,10 @@
 // texture shader.cpp
 #include "textureshader.h"
 
-
 TextureShader::TextureShader(ID3D11Device* device, HWND hwnd) : BaseShader(device, hwnd)
 {
 	InitShader(L"../shaders/texture_vs.hlsl", L"../shaders/texture_ps.hlsl");
 }
-
 
 TextureShader::~TextureShader()
 {

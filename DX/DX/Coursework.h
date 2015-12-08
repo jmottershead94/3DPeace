@@ -1,33 +1,32 @@
-// Application.h
+// Jason Mottershead, 1300455.
+
+// Coursework class header file.
+// This class will set the scene for my coursework application.
+
+// Header guard.
 #ifndef _COURSEWORK_H
 #define _COURSEWORK_H
 
-// Includes
+// Includes.
 #include "baseapplication.h"
-#include "PlaneMesh.h"
-#include "PointLightShader.h"
-#include "PointLightMeshShader.h"
-#include "PointLightMesh.h"
+#include "Scene.h"
 
+// Coursework IS A base application, therefore inherits from it.
 class Coursework : public BaseApplication
 {
-public:
 
-	Coursework(HINSTANCE hinstance, HWND hwnd, int screenWidth, int screenHeight, Input*);
-	~Coursework();
-	bool Frame();
+	public:
+		// Methods.
+		Coursework(HINSTANCE hinstance, HWND hwnd, int screenWidth, int screenHeight, Input* in);
+		~Coursework();
+		bool Frame();
 
-private:
-	bool Render();
-	void RenderTheScene();
+	private:
+		// Attributes.
+		Scene* m_scene;		// Access to the scene we want.
 
-private:
-	// Attributes.
-	PointLightShader* pointlightShader;
-	PointLightMeshShader* m_PointLightShader;
-	Light* m_MultipleLights[3];
-	PointLightMesh* pointlights;
-	PlaneMesh* m_PlaneMesh;
+		// Methods.
+		bool Render();
 
 };
 

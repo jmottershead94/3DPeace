@@ -50,7 +50,7 @@ void ManipulationShader::InitShader(WCHAR* vsFilename, WCHAR* psFilename)
 	// Load (+ compile) shader files
 	loadVertexShader(vsFilename);
 	loadPixelShader(psFilename);
-
+	
 	// Setup the description of the dynamic matrix constant buffer that is in the vertex shader.
 	matrixBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
 	matrixBufferDesc.ByteWidth = sizeof(MatrixBufferType);
@@ -105,6 +105,9 @@ void ManipulationShader::InitShader(WCHAR* vsFilename, WCHAR* psFilename)
 
 	// Create the constant buffer pointer so we can access the vertex shader constant buffer from within this class.
 	m_device->CreateBuffer(&timeBufferDesc, NULL, &m_timeBuffer);
+
+
+	//m_device->CreateComputeShader
 }
 
 void ManipulationShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, const XMMATRIX &worldMatrix, const XMMATRIX &viewMatrix, const XMMATRIX &projectionMatrix, ID3D11ShaderResourceView* texture, Light* light, Timer* timer, float& frequency, float& height, float& width)
@@ -149,9 +152,9 @@ void ManipulationShader::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 	// Send light data to pixel shader
 	deviceContext->Map(m_lightBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	lightPtr = (LightBufferType*)mappedResource.pData;
-	lightPtr->ambient = light->GetAmbientColour();
-	lightPtr->diffuse = light->GetDiffuseColour();
-	lightPtr->direction = light->GetDirection();
+	lightPtr->ambient = XMFLOAT4(0.4f, 0.4f, 0.4f, 1.0f);
+	lightPtr->diffuse = XMFLOAT4(0.2f, 0.2f, 0.2f, 0.0f);
+	lightPtr->direction = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	lightPtr->padding = 0.0f;
 
 	// Unlock the buffer.

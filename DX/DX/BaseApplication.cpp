@@ -2,7 +2,6 @@
 // Base application functionality for inheritnace.
 #include "BaseApplication.h"
 
-
 BaseApplication::BaseApplication(HINSTANCE hinstance, HWND hwnd, int screenWidth, int screenHeight, Input *in)
 {
 	m_Input = in;
@@ -129,10 +128,12 @@ void BaseApplication::HandleInput(float frameTime)
 	{
 		// Turning wireframe mode on.
 		m_Direct3D->TurnOnWireframe();
+		m_wireframeMode = true;
 	}
 	if (m_Input->isKeyDown('V'))
 	{
 		// Turning wireframe mode off.
 		m_Direct3D->TurnOffWireframe();
+		m_wireframeMode = false;
 	}
 }

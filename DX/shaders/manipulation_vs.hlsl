@@ -40,7 +40,7 @@ OutputType main(InputType input)
 	// Offset the position based on the sine wave.
 	//input.position.x += frequency * (width * sin(input.position.z + time));
 	input.position.y = frequency * ((height * sin(input.position.x + time)) + (height * cos(input.position.z + time)));
-
+	
 	// Modify the normals.
 	input.normal.x = 1 - cos(input.position.x + time);
 	input.normal.y = abs(cos(input.position.x + time));

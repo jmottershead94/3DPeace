@@ -49,6 +49,7 @@ float4 main(InputType input) : SV_TARGET
 
     // Multiply the texture pixel and the final diffuse color to get the final pixel color result.
     colour = colour * textureColour;
+	colour.a = 0.5f;
 
 	//colour = saturate(colour);
 

@@ -2,6 +2,7 @@
 #ifndef _POINTMESH_H_
 #define _POINTMESH_H_
 
+#include <vector>
 #include "BaseMesh.h"
 
 using namespace DirectX;
@@ -14,9 +15,10 @@ public:
 	~PointMesh();
 
 	void SendData(ID3D11DeviceContext*);
-
-protected:
 	void InitBuffers(ID3D11Device* device);
+
+//protected:
+	//void InitBuffers(ID3D11Device* device);
 
 };
 

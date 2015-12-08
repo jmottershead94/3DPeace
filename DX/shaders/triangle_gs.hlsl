@@ -8,11 +8,11 @@ cbuffer MatrixBuffer : register(cb0)
 
 cbuffer PositionBuffer : register(cb1)
 {
-	static float3 gPositions[3] =		// Change to gPositions[3] for a triangle, gPositions[4] for a quad.
+	static float3 gPositions[4] =		// Change to gPositions[3] for a triangle, gPositions[4] for a quad.
 	{
 		float3( 0.0f, 1.0f, 0.0f ),		// Top left.
+		float3( 1.0f, 1.0f, 0.0f),		// Top right - comment this out for a triangle.
 		float3( 0.0f, 0.0f, 0.0f ),		// Bottom left.
-		//float3( 1.0f, 1.0f, 0.0f ),		// Top right - comment this out for a triangle.
 		float3( 1.0f, 0.0f, 0.0f )		// Bottom right.
 	};
 	float4 padding;		
@@ -33,11 +33,12 @@ struct OutputType
 };
 
 // Change this to [maxvertexcount(3)] for a triangle, [maxvertexcount(4)] for a quad.
-[maxvertexcount(3)]
+[maxvertexcount(4)]
 void main(point InputType input[1], inout TriangleStream<OutputType> triStream)
 {
 	OutputType output;
-	int number_of_vertices = 3;	// How many vertices the shape has, triangle has 3, quad has 4 etc.
+	int number_of_vertices = 4;	// How many vertices the shape has, triangle has 3, quad has 4 etc.
+	float3 vPosition = { 0.0f, 0.0f, 0.0f };
 
 	// Change the position vector to be 4 units for proper matrix calculations.
     input[0].position.w = 1.0f;
@@ -45,14 +46,15 @@ void main(point InputType input[1], inout TriangleStream<OutputType> triStream)
 	// Used for creating the positions for the points.
 	for (int i = 0; i < number_of_vertices; i++)
 	{
-		float3 vPosition = gPositions[i];
+		vPosition = gPositions[i];
+		vPosition.x += 1;
 		vPosition = mul(vPosition, (float3x3) worldMatrix) + input[0].position;
-		
+
 		// Increase the size of the shape by 2.
 		/*vPosition.x *= 2;
 		vPosition.y *= 2;
 		vPosition.z *= 2;*/
-		
+
 		output.position = mul(float4(vPosition, 1.0f), viewMatrix);
 		output.position = mul(output.position, projectionMatrix);
 

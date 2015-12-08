@@ -6,35 +6,31 @@
 
 // INCLUDES 
 #include <windows.h>
-#include "Lab9.h"
-#include "Lab4.h"
 #include "Coursework.h"
 #include "Input.h"
 
 class System
 {
-public:
-	System();
-	~System();
+	public:
+		System();
+		~System();
+		void Run();
+		LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
 
-	void Run();
+	private:
+		bool Frame();
+		void InitializeWindows(int&, int&);
+		void ShutdownWindows();
 
-	LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
+	private:
+		LPCWSTR m_applicationName;
+		HINSTANCE m_hinstance;
+		HWND m_hwnd;
+		Coursework* m_Application;
+		Input m_Input;
 
-private:
-	bool Frame();
-	void InitializeWindows(int&, int&);
-	void ShutdownWindows();
-
-private:
-	LPCWSTR m_applicationName;
-	HINSTANCE m_hinstance;
-	HWND m_hwnd;
-	Lab4* m_Application;
-	Input m_Input;
-
-//Prototypes
-	static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
+	//Prototypes
+		static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 };
 
 //Globals

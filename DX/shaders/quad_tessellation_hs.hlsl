@@ -1,31 +1,40 @@
-// Quad Tessellation Hull Shader
-// Prepares control points for tessellation
+// Jason Mottershead, 1300455.
 
-cbuffer TessellationBuffer : register(cb)
+// Quad tessellation hull shader file.
+// This will pass along position, texture and normal values for the domain and pixel shader.
+// As well as apply tessellation factor to out mesh.
+
+// Tessellation buffer.
+cbuffer TessellationBuffer : register(cb0)
 {
     float tessellationFactor;
     float3 padding;
 };
 
+// Hull input.
 struct InputType
 {
-    float3 position : POSITION;
-    float4 colour : COLOR;
+    float4 position : POSITION;
+	float2 tex : TEXCOORD0;
+	float3 normal : NORMAL;
 };
 
+// Hull constant output.
 struct ConstantOutputType
 {
     float edges[4] : SV_TessFactor;
     float inside[2] : SV_InsideTessFactor;
 };
 
+// Hull output / domain input.
 struct OutputType
 {
-    float3 position : POSITION;
-    float4 colour : COLOR;
+    float4 position : POSITION;
+	float2 tex : TEXCOORD0;
+	float3 normal : NORMAL;
 };
 
-ConstantOutputType PatchConstantFunction(InputPatch<InputType, 3> inputPatch, uint patchId : SV_PrimitiveID)
+ConstantOutputType PatchConstantFunction(InputPatch<InputType, 4> inputPatch, uint patchId : SV_PrimitiveID)
 {    
     ConstantOutputType output;
 
@@ -47,15 +56,18 @@ ConstantOutputType PatchConstantFunction(InputPatch<InputType, 3> inputPatch, ui
 [outputtopology("triangle_cw")]
 [outputcontrolpoints(4)]
 [patchconstantfunc("PatchConstantFunction")]
-OutputType main(InputPatch<InputType, 3> patch, uint pointId : SV_OutputControlPointID, uint patchId : SV_PrimitiveID)
+OutputType main(InputPatch<InputType, 4> patch, uint pointId : SV_OutputControlPointID, uint patchId : SV_PrimitiveID)
 {
     OutputType output;
 	
     // Set the position for this control point as the output position.
     output.position = patch[pointId].position;
 
-    // Set the input color as the output color.
-    output.colour = patch[pointId].colour;
+	// Passing the texture coordinates to the domain shader.
+	output.tex = patch[pointId].tex;
+
+	// Passing the normal values to the domain shader.
+	output.normal = patch[pointId].normal;
 
     return output;
 }

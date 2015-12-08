@@ -26,7 +26,6 @@ struct OutputType
 OutputType main(InputType input)
 {
     OutputType output;
-	float4 worldPosition;
     
     // Change the position vector to be 4 units for proper matrix calculations.
     input.position.w = 1.0f;
