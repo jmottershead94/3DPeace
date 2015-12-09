@@ -24,10 +24,10 @@ void PointMesh::InitBuffers(ID3D11Device* device)
 	D3D11_SUBRESOURCE_DATA vertexData, indexData;
 
 	// Set the number of vertices in the vertex array.
-	m_vertexCount = 4;	// Change to 3 for a triangle, 6 for a quad.
+	m_vertexCount = 1;	// Change to 3 for a triangle, 6 for a quad.
 
 	// Set the number of indices in the index array.
-	m_indexCount = 4;	// Change to 3 for a triangle, 4 for a quad.
+	m_indexCount = 1;	// Change to 3 for a triangle, 4 for a quad.
 
 	// Create the vertex array.
 	vertices = new VertexType[m_vertexCount];
@@ -40,23 +40,8 @@ void PointMesh::InitBuffers(ID3D11Device* device)
 	vertices[0].texture = XMFLOAT2(0.0f, 0.0f);
 	vertices[0].normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
 
-	vertices[1].position = XMFLOAT3(1.0f, 0.0f, 0.0f);  // Bottom right.
-	vertices[1].texture = XMFLOAT2(1.0f, 0.0f);
-	vertices[1].normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
-
-	vertices[2].position = XMFLOAT3(0.0f, 1.0f, 0.0f);  // Top left.
-	vertices[2].texture = XMFLOAT2(0.0f, 1.0f);
-	vertices[2].normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
-
-	vertices[3].position = XMFLOAT3(1.0f, 1.0f, 0.0f);  // Top right.
-	vertices[3].texture = XMFLOAT2(0.0f, 1.0f);
-	vertices[3].normal = XMFLOAT3(0.0f, 0.0f, -1.0f);	
-
 	// Load the index array with data.
 	indices[0] = 0;  // Bottom left.
-	indices[1] = 1;  // Bottom right.
-	indices[2] = 2;  // Top left.
-	indices[3] = 3;	 // Top right - comment this out for a triangle.
 
 	// Set up the description of the static vertex buffer.
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -114,6 +99,6 @@ void PointMesh::SendData(ID3D11DeviceContext* deviceContext)
 	deviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 	// Set the type of primitive that should be rendered from this vertex buffer, in this case control patch for tessellation.
-	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
 }
 

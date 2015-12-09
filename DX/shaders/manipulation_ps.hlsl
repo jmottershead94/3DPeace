@@ -1,4 +1,4 @@
-// Light pixel shader
+// Manipulation pixel shader
 // Calculate ambient and diffuse lighting for a single light (also texturing)
 
 Texture2D shaderTexture : register(t0);
@@ -51,7 +51,7 @@ float4 main(InputType input) : SV_TARGET
     colour = colour * textureColour;
 	colour.a = 0.5f;
 
-	//colour = saturate(colour);
+	colour = saturate(colour);
 
 	return colour;
 }

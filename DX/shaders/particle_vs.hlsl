@@ -1,7 +1,7 @@
 // Jason Mottershead, 1300455.
 
 // Particle vertex shader file.
-// This will output a colour based on the lighting calculations.
+// This will pass along the vertex values and not change anything major.
 
 // Vertex input.
 struct InputType
@@ -19,16 +19,7 @@ struct OutputType
 
 InputType main(InputType input)
 {
-	OutputType output;
 
-	// The last element in the position float, 1.0f for matrix calculations.
-	input.position.w = 1.0f;
+	return input;
 
-	// Calculate the position of the vertex against the world, view, and projection matrices.
-	output.position = input.position;
-
-	// The colour of the current vertex.
-	output.colour = input.colour;
-
-	return output;
 }

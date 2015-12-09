@@ -12,7 +12,7 @@ Scene::Scene(HWND hwnd, int screenWidth, int screenHeight, D3D* direct3D, Input 
 {
 
 	// Initialising the light control state, tessellation factor, and manipulation attributes.
-	m_controllingShadowLights = false;
+	m_controllingShadowLights = true;
 	m_useBoxBlur = false;
 	m_tessellationFactor = 2.0f;
 	m_manipulationFrequency = 0.5f;
@@ -661,11 +661,9 @@ void Scene::RenderTheParticles(XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMA
 void Scene::RenderTheScene(float dt)
 {
 
-	// Multi-pass rendering - minimap and shadows.
+	// Post processing/Multi-pass rendering.
 	RenderToShadowTexture();
 	RenderToMiniMap();
-
-	// Post processing - box blur.
 	RenderToTextureBlur();
 
 	XMMATRIX worldMatrix, baseViewMatrix, viewMatrix, projectionMatrix, orthoMatrix;

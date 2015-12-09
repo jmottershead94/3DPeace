@@ -4,8 +4,6 @@
 // This will pass along position, texture and normal values for the domain and pixel shader.
 // After tessellation the domain shader processes the all the vertices.
 // Here we will apply our height and normal maps.
-
-Texture2D shaderTexture		: register(t0);		// The shader texture, the terrain texture in this case.
 Texture2D heightMapTexture	: register(t1);		// The height map texture.
 Texture2D normalMapTexture	: register(t2);		// The normap map texture.
 SamplerState sampleType		: register(s0);		// The sample type.
@@ -71,7 +69,7 @@ OutputType main(ConstantOutputType input, float2 uvwCoord : SV_DomainLocation, c
 
 	// Sample the current normal colour at a specified position.
 	// This should alter normals based on the normal map provided.
-	normalPosition.y = normalMapTexture.SampleLevel(sampleType, normalPosition, 1);
+	normalPosition.y = normalMapTexture.SampleLevel(sampleType, texturePosition, 1);
 
 	// Calculate the position of the new vertex against the world, view, and projection matrices.
 	output.position = mul(float4(vertexPosition, 1.0f), worldMatrix);

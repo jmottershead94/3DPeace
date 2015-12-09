@@ -21,20 +21,11 @@ struct OutputType
 
 OutputType main(InputType input)
 {
-	OutputType output;
 
 	// Change the position vector to be 4 units for proper matrix calculations.
 	input.position.w = 1.0f;
 
-	// Calculate the position of the vertex against the world, view, and projection matrices.
-	output.position = input.position;
-
-	// Store the texture coordinates for the pixel shader.
-	output.tex = input.tex;
-
-	// Calculate the normal vector against the world matrix only.
-	output.normal = input.normal;
-
 	// Pass the output along.
-	return output;
+	return input;
+
 }

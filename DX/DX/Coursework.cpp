@@ -15,7 +15,7 @@ Coursework::Coursework(HINSTANCE hinstance, HWND hwnd, int screenWidth, int scre
 	m_Camera->SetPosition(30.0f, 10.0f, -100.0f);
 
 	// Setting the camera rotation to how we want to start looking at the scene.
-	m_Camera->SetRotation(15.0f, 35.0f, 0.0f);
+	m_Camera->SetRotation(10.0f, 25.0f, 0.0f);
 
 	// Initialising a new scene.
 	m_scene = new Scene(hwnd, screenWidth, screenHeight, m_Direct3D, m_Input, m_Camera, m_Timer);

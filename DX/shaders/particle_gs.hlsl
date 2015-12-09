@@ -1,7 +1,7 @@
 // Jason Mottershead, 1300455.
 
 // Particle geometry shader file.
-// This will output a colour based on the lighting calculations.
+// This will output a shape based on a point.
 
 // Matrix buffer.
 cbuffer MatrixBuffer : register(cb0)
@@ -43,6 +43,7 @@ struct OutputType
 [maxvertexcount(4)]
 void main(point InputType input[1], inout TriangleStream<OutputType> triStream)
 {
+
 	OutputType output;
 	int numberOfVertices = 4;
 	float3 vPosition = { 0.0f, 0.0f, 0.0f };
@@ -71,7 +72,7 @@ void main(point InputType input[1], inout TriangleStream<OutputType> triStream)
 
 		// Calculate the output position based on the vertex.
 		output.position = mul(float4(vPosition, 1.0f), worldMatrix);
-		output.position = mul(float4(vPosition, 1.0f), viewMatrix);
+		output.position = mul(output.position, viewMatrix);
 		output.position = mul(output.position, projectionMatrix);
 
 		// Calculate the output colour of the particle.
@@ -81,4 +82,5 @@ void main(point InputType input[1], inout TriangleStream<OutputType> triStream)
 	}
 
 	triStream.RestartStrip();
+
 }

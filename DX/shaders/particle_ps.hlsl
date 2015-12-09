@@ -12,10 +12,7 @@ struct InputType
 
 float4 main(InputType input) : SV_TARGET
 {
-	float4 colour = { 0.0f, 0.0f, 0.0f, 1.0f };
 
-	// The colour we want is being passed through the previous stages.
-	colour = input.colour;
+	return input.colour;
 
-	return colour;
 }

@@ -205,7 +205,7 @@ void MasterShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, const
 	deviceContext->DSSetConstantBuffers(bufferNumber, 1, &m_matrixBuffer);
 
 	//Additional
-	// Send light data to pixel shader
+	// Send tessellation data to hull shader
 	deviceContext->Map(m_tessellationBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	tessellationPtr = (TessellationBufferType*)mappedResource.pData;
 	tessellationPtr->tessellationFactor = tessellationFactor;
@@ -241,7 +241,6 @@ void MasterShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, const
 	deviceContext->PSSetConstantBuffers(bufferNumber, 1, &m_lightBuffer);
 
 	// Set the shader texture resource in the domain shader.
-	deviceContext->DSSetShaderResources(0, 1, &texture);
 	deviceContext->DSSetShaderResources(1, 1, &heightMapTexture);
 	deviceContext->DSSetShaderResources(2, 1, &normalMapTexture);
 

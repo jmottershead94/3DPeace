@@ -1,4 +1,4 @@
-// Light vertex shader
+// Manipulation vertex shader
 // Standard issue vertex shader, apply matrices, pass info to pixel shader
 
 cbuffer MatrixBuffer : register(cb0)
@@ -37,13 +37,8 @@ OutputType main(InputType input)
     // Change the position vector to be 4 units for proper matrix calculations.
     input.position.w = 1.0f;
 
-	// Offset the position based on the sine wave.
-	//input.position.x += frequency * (width * sin(input.position.z + time));
-	input.position.y = frequency * ((height * sin(input.position.x + time)) + (height * cos(input.position.z + time)));
-	
-	// Modify the normals.
-	input.normal.x = 1 - cos(input.position.x + time);
-	input.normal.y = abs(cos(input.position.x + time));
+	// Offset the position based on the sine and cosine wave.
+	input.position.y = frequency * ((width * sin(input.position.x + time)) + (height * cos(input.position.z + time)));
 
     // Calculate the position of the vertex against the world, view, and projection matrices.
     output.position = mul(input.position, worldMatrix);

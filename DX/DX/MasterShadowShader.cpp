@@ -116,6 +116,7 @@ void MasterShadowShader::InitShader(WCHAR* vsFilename, WCHAR* psFilename)
 	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
 	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
 	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+	
 	// Create the texture sampler state.
 	m_device->CreateSamplerState(&samplerDesc, &m_sampleStateClamp);
 
